@@ -22,7 +22,8 @@ def setup_logger(name):
     logger = logging.getLogger(name)
     for hdlr in lymph_logger.handlers:
         logger.addHandler(hdlr)
-    logger.setLevel(lymph_logger.level)
+    if logger.level < lymph_logger.level:
+        logger.setLevel(lymph_logger.level)
     # Since we are using DictConfig all logger are disabled by default first, so
     # we are enabling any logger here !
     logger.disabled = False
